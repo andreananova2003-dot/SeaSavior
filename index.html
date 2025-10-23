@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamatkan Laut Kita dari Plastik - Kampanye</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* == PENGATURAN DASAR == */
+        :root {
+            --primary-color: #0077b6; /* Biru Laut */
+            --secondary-color: #00b4d8; /* Biru Langit */
+            --accent-color: #fca311;   /* Jingga (Oranye) */
+            --text-dark: #222;
+            --text-light: #f8f9fa;
+            --bg-light: #fdfdfd;
+            --bg-medium: #eef8ff; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; line-height: 1.6; color: var(--text-dark); background-color: var(--bg-light); }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; color: var(--primary-color); text-align: center; margin-bottom: 2rem;}
+        h3 { font-size: 1.25rem; }
+        p { margin-bottom: 1rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5rem 0; overflow-x: hidden; }
+        img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+        .btn { display: inline-block; padding: 0.8rem 2rem; background-color: var(--accent-color); color: var(--text-light); text-decoration: none; font-weight: 700; border-radius: 50px; transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
+        .btn:hover { background-color: #ffb703; transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        .header { background-color: #ffffff; border-bottom: 1px solid #eee; padding: 1rem 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: box-shadow 0.3s ease; }
+        .header.sticky { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.5rem; font-weight: 900; color: var(--primary-color); text-decoration: none; }
+        .nav-menu { list-style: none; display: flex; }
+        .nav-item { margin-left: 2rem; }
+        .nav-link { text-decoration: none; color: var(--text-dark); font-weight: 700; transition: color 0.3s ease; }
+        .nav-link:hover { color: var(--secondary-color); }
+
+        /* == HERO (BAGIAN ATAS) == */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 90vh;
+            margin-top: 60px;
+            color: var(--text-light);
+            /* FOTO DIPERBAIKI: Mengambil dari folder /images/ */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('images/hero.jpg') 
+                        no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero-content h1 { margin-bottom: 1rem; font-weight: 900; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+        .hero-content p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem auto; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+        .wave-divider { position: absolute; bottom: -1px; left: 0; width: 100%; overflow: hidden; line-height: 0; }
+        .wave-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 100px; }
+        .wave-divider .shape-fill { fill: var(--bg-light); }
+
+        /* == BAGIAN KONTEN UMUM == */
+        .content-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        #problem, #pollutants { background-color: var(--bg-light); }
+        #impact { background-color: var(--bg-medium); }
+        .content-section:nth-of-type(even) .content-text { order: 2; }
+        .content-text { padding-right: 2rem; text-align: left; }
+        .content-text h2 { text-align: left; margin-bottom: 1rem; }
+        .content-image { display: flex; justify-content: center; align-items: center; }
+        .content-image img { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        #facts { background-color: var(--bg-medium); }
+        .facts-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; margin-top: 3rem; }
+        .fact-box { background: #fff; padding: 2.5rem 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.07); border-top: 5px solid var(--accent-color); }
+        .fact-number { font-size: 3rem; font-weight: 900; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .fact-text { font-size: 1.1rem; color: #555; font-weight: 700; }
+        #solution { background-color: var(--bg-light); }
+        #solution p.intro { text-align: center; max-width: 700px; margin: 0 auto 3rem auto; }
+        .solution-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .card { background-color: #fff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 2rem; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+        .card-icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem; }
+        .card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .cta { background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: var(--text-light); text-align: center; padding: 6rem 2rem; border-radius: 15px; margin: 4rem auto; }
+        .cta h2 { color: var(--text-light); font-size: 2.8rem; margin-bottom: 1.5rem; text-align: center; }
+        .cta p { font-size: 1.15rem; margin-bottom: 2rem; }
+        .cta .btn { background-color: var(--text-light); color: var(--primary-color); }
+        .cta .btn:hover { background-color: #ddd; color: var(--primary-color); }
+        .footer { background-color: var(--text-dark); color: #aaa; text-align: center; padding: 3rem 0; margin-top: 3rem; }
+        .footer-watermark p { margin: 0.5rem 0; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.5; }
+        .footer-watermark span { color: var(--text-light); font-weight: 700; font-size: 1.1rem; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* == RESPONSIVE DESIGN (untuk HP) == */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; text-align: center; }
+            .nav-menu { display: none; }
+            .hero { height: 70vh; }
+            .content-section { grid-template-columns: 1fr; }
+            .content-section:nth-of-type(even) .content-text { order: 0; }
+            .content-text { padding-right: 0; text-align: center; }
+            .content-text h2 { text-align: center; }
+            .content-image { margin-top: 2rem; }
+            .facts-container,
+            .solution-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="container navbar">
+            <a href="#" class="nav-logo">SeaSavior</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#problem" class="nav-link">Masalah</a></li>
+                <li class="nav-item"><a href="#impact" class="nav-link">Dampak</a></li>
+                <li class="nav-item"><a href="#pollutants" class="nav-link">Ancaman</a></li>
+                <li class="nav-item"><a href="#solution" class="nav-link">Solusi</a></li>
+                <li class="nav-item"><a href="#cta" class="btn">Ayo Aksi!</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content fade-in visible">
+                <h1>LAUT MEMANGGIL.</h1>
+                <p>Jutaan ton plastik mengancam kehidupan laut. Saatnya kita bertindak menyelamatkan rumah mereka, dan rumah kita.</p>
+                <a href="#problem" class="btn">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="wave-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section id="problem">
+            <div class="container content-section fade-in">
+                <div class="content-text">
+                    <h2>Krisis Tak Terlihat di Bawah Permukaan</h2>
+                    <p>Setiap tahun, diperkirakan <strong>8 hingga 12 juta ton plastik</strong> masuk ke lautan kita. Itu setara dengan satu truk sampah plastik yang dibuang ke laut setiap menitnya.</p>
+                    <p>Plastik ini tidak terurai secara hayati. Sebaliknya, mereka pecah menjadi potongan-potongan kecil yang disebut <strong>mikroplastik</strong>, yang mencemari air, meracuni hewan, dan bahkan masuk ke dalam rantai makanan kita.</p>
+                </div>
+                <div class="content-image">
+                    <img src="images/problem.jpg" alt="Sampah Plastik di Pantai">
+                </div>
+            </div>
+        </section>
+
+        <section id="impact">
+            <div class="container content-section fade-in">
+                <div class="content-image">
+                    <img src="images/impact.jpg" alt="Penyu berenang dekat kantong plastik">
+                </div>
+                <div class="content-text">
+                    <h2>Harga yang Dibayar oleh Kehidupan</h2>
+                    <p>Lebih dari <strong>100.000 mamalia laut</strong> dan <strong>1 juta burung laut</strong> mati setiap tahun akibat polusi plastik. Mereka sering mengira plastik sebagai makanan atau terjerat di dalamnya.</p>
+                    <p>Dari paus terbesar hingga plankton terkecil, tidak ada kehidupan laut yang aman. Kerusakan terumbu karang juga diperparah oleh sampah plastik yang membawa penyakit dan menghalangi sinar matahari.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="facts">
+            <div class="container fade-in">
+                <h2>Fakta Mengejutkan</h2>
+                <div class="facts-container">
+                    <div class="fact-box">
+                        <div class="fact-number" data-target="8000000">0</div>
+                        <div class="fact-text">Ton Plastik Masuk Laut Setiap Tahun</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-number" data-target="100000">0</div>
+                        <div class="fact-text">Mamalia Laut Mati Akibat Plastik per Tahun</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-number" data-target="2050">0</div>
+                        <div class="fact-text">Tahun Dimana Plastik Akan Lebih Banyak dari Ikan</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pollutants">
+            <div class="container content-section fade-in">
+                 <div class="content-image">
+                    <img src="images/pollutants.jpg" alt="Jaring ikan tua di terumbu karang">
+                </div>
+                <div class="content-text">
+                    <h2>Ancaman Tersembunyi</h2>
+                    <p>Polusi plastik bukan hanya botol dan tas. Ada dua pelaku utama yang sering terabaikan:</p>
+                    <p><strong>Mikroplastik:</strong> Partikel plastik berukuran kurang dari 5mm, berasal dari kosmetik, pakaian sintetis, atau pecahan plastik besar. Mereka mudah termakan oleh plankton, masuk ke rantai makanan, dan berakhir di piring kita.</p>
+                    <p><strong>Jaring Hantu (Ghost Nets):</strong> Alat tangkap ikan yang hilang atau dibuang. Jaring ini terus "menangkap" ikan, penyu, lumba-lumba, dan mamalia laut lainnya selama puluhan tahun, menjadi perangkap mematikan di dasar laut.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution">
+            <div class="container fade-in">
+                <h2>Bagaimana Kita Bisa Membantu?</h2>
+                <p class="intro">Perubahan dimulai dari kita. Tindakan kecil yang konsisten dapat menciptakan dampak besar bagi kesehatan lautan kita.</p>
+                
+                <div class="solution-cards">
+                    <div class="card fade-in" style="transition-delay: 200ms;">
+                        <div class="card-icon">♻️</div>
+                        <h3>Kurangi, Gunakan Ulang, Daur Ulang</h3>
+                        <p>Tolak plastik sekali pakai. Bawa tas belanja, botol minum, dan sedotan sendiri. Pilih produk dengan kemasan minimal atau tanpa plastik.</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 400ms;">
+                        <div class="card-icon">🌊</div>
+                        <h3>Gabung Aksi Bersih Pantai</h3>
+                        <p>Berpartisipasilah dalam kegiatan bersih-bersih pantai lokal. Setiap potongan plastik yang Anda ambil adalah satu ancaman lebih sedikit bagi hewan laut.</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 600ms;">
+                        <div class="card-icon">📣</div>
+                        <h3>Suarakan & Edukasi</h3>
+                        <p>Beri tahu teman dan keluarga Anda tentang masalah ini. Dukung bisnis dan kebijakan yang mengurangi penggunaan plastik dan mempromosikan ekonomi sirkular.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container cta fade-in">
+                <h2>Bergabunglah dengan Gerakan Ini</h2>
+                <p>Jangan hanya menjadi penonton. Ambil langkah hari ini untuk melindungi lautan kita untuk generasi mendatang.</p>
+                <a href="#" class="btn">Daftar Sebagai Relawan</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-watermark">
+            <p><span>Nova Andreana</span></p>
+            <p>NRP: 5016221085</p>
+            <p>Departemen Teknik Geomatika</p>
+            <p>Institut Teknologi Sepuluh Nopember (ITS)</p>
+        </div>
+    </footer>
+
+    <script>
+        // === 1. FUNGSI HEADER STICKY ===
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        });
+
+        // === 2. FUNGSI ANIMASI FADE-IN SAAT SCROLL ===
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const elementsToFadeIn = document.querySelectorAll('.fade-in');
+        elementsToFadeIn.forEach(el => fadeObserver.observe(el));
+        
+        // === 3. FUNGSI ANIMASI COUNTER ANGKA ===
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    startCounters(entry.target);
+                    entry.target.classList.add('animated'); 
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const factsSection = document.getElementById('facts');
+        if (factsSection) {
+            counterObserver.observe(factsSection);
+        }
+
+        function startCounters(sectionElement) {
+            const counters = sectionElement.querySelectorAll('.fact-number');
+            const speed = 200; 
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0; 
+                const increment = target / speed;
+
+                const updateCount = () => {
+                    if (count < target) {
+                        count += increment;
+                        counter.innerText = Math.ceil(count).toLocaleString('id-ID');
+                        requestAnimationFrame(updateCount); 
+                    } else {
+                        counter.innerText = target.toLocaleString('id-ID');
+                    }
+                };
+                updateCount();
+            });
+        }
+    </script>
+</body>
+</html>
